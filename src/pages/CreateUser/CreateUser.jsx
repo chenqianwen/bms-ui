@@ -17,7 +17,7 @@ export default class CreateUser extends Component {
   render() {
     const breadcrumb = [
       { text: '用户管理', link: '' },
-      { text: '添加用户', link: '#/user/list' },
+      { text: '添加用户', link: '/user/list' },
     ];
     return (
       <div className="create-user-page">

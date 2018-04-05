@@ -17,7 +17,7 @@ export default class CreateCate extends Component {
   render() {
     const breadcrumb = [
       { text: '分类管理', link: '' },
-      { text: '添加分类', link: '#/cate/list' },
+      { text: '添加分类', link: '/cate/create' },
     ];
     return (
       <div className="create-cate-page">

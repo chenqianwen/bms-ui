@@ -1,29 +1,29 @@
-import React, { PureComponent } from 'react';
-import { Balloon, Icon } from '@icedesign/base';
+import React, {PureComponent} from 'react';
+import {Balloon, Icon} from '@icedesign/base';
 import IceImg from '@icedesign/img';
 import Layout from '@icedesign/layout';
 import Menu from '@icedesign/menu';
 import FoundationSymbol from 'foundation-symbol';
 import cx from 'classnames';
-import { Link } from 'react-router';
-import { headerNavs } from '../navs';
+import {Link} from 'react-router';
+import {headerNavs} from '../navs';
 import Logo from './Logo';
 
 export default class Header extends PureComponent {
   render() {
-    const { width, theme, isMobile, className, style, ...others } = this.props;
+    const {width, theme, isMobile, className, style, ...others} = this.props;
 
     return (
       <Layout.Header
         {...others}
         theme={theme}
         className={cx('ice-design-layout-header', className)}
-        style={{ ...style, width }}
+        style={{...style, width}}
       >
-        <Logo />
+        <Logo/>
         <div
           className="ice-design-layout-header-menu"
-          style={{ display: 'flex' }}
+          style={{display: 'flex'}}
         >
           {/* Header 菜单项 begin */}
           {headerNavs && headerNavs.length > 0 ? (
@@ -43,7 +43,8 @@ export default class Header extends PureComponent {
                   <Menu.Item key={idx}>
                     <Link {...linkProps}>
                       {nav.icon ? (
-                        <FoundationSymbol type={nav.icon} size="small" />
+                        <Icon type={nav.icon} size="small"/>
+                        // <FoundationSymbol type={nav.icon} size="small" />
                       ) : null}
                       {!isMobile ? nav.text : null}
                     </Link>
@@ -54,7 +55,7 @@ export default class Header extends PureComponent {
           ) : null}
           {/* Header 菜单项 end */}
 
-          {/* Header 右侧内容块 */}
+          {/* Header 右侧个人数据 */}
           <Balloon
             trigger={
               <div
@@ -68,17 +69,17 @@ export default class Header extends PureComponent {
                 <IceImg
                   height={40}
                   width={40}
-                  src="http://img1.bitautoimg.com/autoalbum/files/20141023/689/15073468912862_8.JPG"
+                  src="https://images.unsplash.com/photo-1490426951762-7df2e77e568a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5519e2265996c14edbae39603026a40c&auto=format&fit=crop&w=500&q=60"
                   className="user-avatar"
                 />
                 <div className="user-profile">
-                  <span className="user-name" style={{ fontSize: '13px' }}>
+                  <span className="user-name" style={{fontSize: '13px'}}>
                     淘小宝
                   </span>
-                  <br />
+                  <br/>
                   <span
                     className="user-department"
-                    style={{ fontSize: '12px' }}
+                    style={{fontSize: '12px'}}
                   >
                     技术部
                   </span>
@@ -97,17 +98,17 @@ export default class Header extends PureComponent {
             <ul>
               <li className="user-profile-menu-item">
                 <Link to="/">
-                  <FoundationSymbol type="person" size="small" />我的主页
+                  <FoundationSymbol type="person" size="small"/>我的主页
                 </Link>
               </li>
               <li className="user-profile-menu-item">
                 <Link to="/">
-                  <FoundationSymbol type="repair" size="small" />设置
+                  <FoundationSymbol type="repair" size="small"/>设置
                 </Link>
               </li>
               <li className="user-profile-menu-item">
                 <Link to="/login">
-                  <FoundationSymbol type="compass" size="small" />退出
+                  <FoundationSymbol type="compass" size="small"/>退出
                 </Link>
               </li>
             </ul>

@@ -25,6 +25,7 @@ menu:
 mode="horizontal" 水平展示
 mode="inline" 垂直展示
 
+public/index.
 
 HeaderAsideFooterResponsiveLayout: 整个页面的布局。
   Header:  src/components/Header.jsx  头部布局

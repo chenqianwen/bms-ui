@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router';
-
 export default class Logo extends PureComponent {
   render() {
     return (
       <div className="logo" style={{}}>
         <Link to="/" className="logo-text">
-          未来科技 <img src="../masha.png" style={{ width: 40, height: 40 }} />
+          LOGO
         </Link>
       </div>
     );

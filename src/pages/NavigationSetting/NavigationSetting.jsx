@@ -17,7 +17,7 @@ export default class NavigationSetting extends Component {
   render() {
     const breadcrumb = [
       { text: '通用设置', link: '' },
-      { text: '菜单设置', link: '#/setting/navigation' },
+      { text: '菜单设置', link: '/setting/navigation' },
     ];
     return (
       <div className="navigation-setting-page">

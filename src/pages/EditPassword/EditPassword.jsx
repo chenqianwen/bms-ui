@@ -17,7 +17,7 @@ export default class EditPassword extends Component {
   render() {
     const breadcrumb = [
       { text: '用户管理', link: '' },
-      { text: '修改密码', link: '#/user/list' },
+      { text: '修改密码', link: '/user/list' },
     ];
     return (
       <div className="edit-password-page">

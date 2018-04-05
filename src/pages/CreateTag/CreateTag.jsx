@@ -17,7 +17,7 @@ export default class CreateTag extends Component {
   render() {
     const breadcrumb = [
       { text: '标签管理', link: '' },
-      { text: '添加标签', link: '#/tag/create' },
+      { text: '添加标签', link: '/tag/create' },
     ];
     return (
       <div className="create-tag-page">

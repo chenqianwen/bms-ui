@@ -15,11 +15,12 @@ export default class PostList extends Component {
   render() {
     const breadcrumb = [
       { text: '文章管理', link: '' },
-      { text: '文章列表', link: '#/post/list' },
+      { text: '文章列表', link: '/post/list' },
     ];
+    const path = '/post/list'
     return (
       <div className="post-list-page">
-        <CustomBreadcrumb dataSource={breadcrumb} />
+        <CustomBreadcrumb dataSource={breadcrumb} path={path} />
         <TabTable />
       </div>
     );

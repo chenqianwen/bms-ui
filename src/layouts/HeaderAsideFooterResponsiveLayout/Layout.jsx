@@ -1,21 +1,27 @@
 /* eslint no-undef:0, no-unused-expressions:0, array-callback-return:0 */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import cx from 'classnames';
 import Layout from '@icedesign/layout';
-import { Icon } from '@icedesign/base';
-import Menu, { SubMenu, Item as MenuItem } from '@icedesign/menu';
-import { Link } from 'react-router';
+import {Icon} from '@icedesign/base';
+import Menu, {SubMenu, Item as MenuItem} from '@icedesign/menu';
+import DynamicIcon from 'dynamic-icon';
+
 import FoundationSymbol from 'foundation-symbol';
-import { enquire } from 'enquire-js';
+import {enquire} from 'enquire-js';
 import Header from './../../components/Header';
-import Footer from './../../components/Footer';
+import Footer from './../../components/Footer';import {Link} from 'react-router';
 import Logo from './../../components/Logo';
-import { asideNavs } from './../../navs';
+import {asideNavs} from './../../navs';
 import './scss/light.scss';
 import './scss/dark.scss';
 
 // 设置默认的皮肤配置，支持 dark 和 light 两套皮肤配置
 // const themeDeafult = typeof THEME === 'undefined' ? 'dark' : THEME;
+const CustomIcon = DynamicIcon.create({
+  fontFamily: 'iceicon2',
+  prefix: 'ice-icon-stable',
+  css: 'https://at.alicdn.com/t/font_107674_7dns782b1jsb57b9.css'
+});
 
 export default class HeaderAsideFooterResponsiveLayout extends Component {
   static propTypes = {};
@@ -79,7 +85,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
   };
 
   toggleCollapse = () => {
-    const { collapse } = this.state;
+    const {collapse} = this.state;
     const openKeys = !collapse ? [] : this.openKeysCache;
 
     this.setState({
@@ -92,7 +98,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
    * 左侧菜单收缩切换
    */
   toggleMenu = () => {
-    const { openDrawer } = this.state;
+    const {openDrawer} = this.state;
     this.setState({
       openDrawer: !openDrawer,
     });
@@ -119,10 +125,10 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
    * 获取当前展开的菜单项
    */
   getOpenKeys = () => {
-    const { routes } = this.props;
+    const {routes} = this.props;
     const matched = routes[0].path;
     let openKeys = [];
-
+    HeaderAsideFooterResponsiveLayout
     asideNavs &&
     asideNavs.length > 0 &&
     asideNavs.map((item, index) => {
@@ -145,12 +151,12 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
   };
 
   render() {
-    const { location = {} } = this.props;
-    const { pathname } = location;
+    const {location = {}} = this.props;
+    const {pathname} = location;
 
     return (
       <Layout
-        style={{ minHeight: '100vh' }}
+        style={{minHeight: '100vh'}}
         className={cx(
           `ice-design-header-aside-footer-responsive-layout-${this.state.theme}`,
           {
@@ -164,6 +170,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
           isMobile={this.state.isScreen !== 'isDesktop' ? true : undefined}
         />
         <Layout.Section>
+          {/* 手机 切换菜单的按钮就是- -分类- - */}
           {this.state.isScreen === 'isMobile' && (
             <a className="menu-btn" onClick={this.toggleMenu}>
               <Icon type="category" size="small"/>
@@ -172,7 +179,9 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
           {this.state.openDrawer && (
             <div className="open-drawer-bg" onClick={this.toggleMenu}/>
           )}
+          {/* 切换主题的按钮 */}
           <a className="theme-btn" onClick={this.toggleTheme}>切换主题</a>
+          {/* 侧边菜单 begin */}
           <Layout.Aside
             width="auto"
             theme={this.state.theme}
@@ -180,7 +189,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
               'open-drawer': this.state.openDrawer,
             })}
           >
-            {/* 侧边菜单项 begin */}
+            {/* 不是手机 切换菜单的按钮就是- -箭头- - */}
             {this.state.isScreen !== 'isMobile' && (
               <a className="collapse-btn" onClick={this.toggleCollapse}>
                 <Icon
@@ -189,36 +198,68 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
                 />
               </a>
             )}
+            {/* 如果是手机，在Menu上显示logo  */}
             {this.state.isScreen === 'isMobile' && <Logo/>}
+            {/*{渲染左侧菜单--------------------}*/}
             <Menu
-              style={{ width: this.state.collapse ? 60 : 200 }}
+              style={{width: this.state.collapse ? 60 : 200}}
+              defaultSelectedKeys={[pathname]}
               inlineCollapsed={this.state.collapse}
               mode="inline"
               selectedKeys={[pathname]}
               openKeys={this.state.openKeys}
-              defaultSelectedKeys={[pathname]}
               onOpenChange={this.onOpenChange}
               onClick={this.onMenuClick}
             >
               {asideNavs &&
               asideNavs.length > 0 &&
               asideNavs.map((nav, index) => {
+                {/*{如果有二级菜单}*/}
                 if (nav.children && nav.children.length > 0) {
                   return (
-                    <SubMenu
-                      key={index}
-                      title={
-                        <span>
-                            {nav.icon ? (
-                              <FoundationSymbol size="small" type={nav.icon}/>
-                            ) : null}
-                          <span className="ice-menu-collapse-hide">
-                              {nav.text}
-                            </span>
+                    <SubMenu key={index} title={
+                      <span>{nav.icon ? (<CustomIcon size="small" type={nav.icon} />) : null}
+                        <span className="ice-menu-collapse-hide">
+                            {nav.text}
                           </span>
+                        </span>
                       }
                     >
+                      {/*{遍历二级菜单}*/}
                       {nav.children.map((item) => {
+                        {/*{如果有三级菜单}*/}
+                        if (item.children && item.children.length > 0) {
+                          return (
+                            <SubMenu key={item.path} title={
+                              <span>{nav.icon ? (<FoundationSymbol size="small" type={nav.icon}/>) : null}
+                                <span style={{padding:0}}>
+                                  {item.text}
+                                </span>
+                              </span>
+                            }
+                            >
+                              {/*{遍历三级级菜单}*/}
+                              {item.children.map((third) => {
+                                const linkProps = {};
+                                if (third.newWindow) {
+                                  linkProps.href = third.to;
+                                  linkProps.target = '_blank';
+                                } else if (third.external) {
+                                  linkProps.href = third.to;
+                                } else {
+                                  linkProps.to = third.to;
+                                }
+                                return (
+                                  <MenuItem key={third.to}>
+                                    <Link {...linkProps}>{third.text}</Link>
+                                  </MenuItem>
+                                );
+                              })
+                              }
+                            </SubMenu>
+                          )
+                        }
+                        {/*{如果没有三级菜单}*/}
                         const linkProps = {};
                         if (item.newWindow) {
                           linkProps.href = item.to;
@@ -237,6 +278,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
                     </SubMenu>
                   );
                 }
+                {/*{如果没有二级菜单}*/}
                 const linkProps = {};
                 if (nav.newWindow) {
                   linkProps.href = nav.to;
