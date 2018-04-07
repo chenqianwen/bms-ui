@@ -166,7 +166,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
       >
         {/* 头部logo和个人信息 */}
         <Header
-          theme={this.state.theme}
+          theme={this.state.theme} selectedKeys={[pathname]}
           isMobile={this.state.isScreen !== 'isDesktop' ? true : undefined}
         />
         <Layout.Section>
@@ -230,7 +230,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
                         {/*{如果有三级菜单}*/}
                         if (item.children && item.children.length > 0) {
                           return (
-                            <SubMenu key={item.path} title={
+                            <SubMenu key={item.to} title={
                               <span>{nav.icon ? (<FoundationSymbol size="small" type={nav.icon}/>) : null}
                                 <span style={{padding:0}}>
                                   {item.text}

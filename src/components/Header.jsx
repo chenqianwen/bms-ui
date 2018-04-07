@@ -11,7 +11,7 @@ import Logo from './Logo';
 
 export default class Header extends PureComponent {
   render() {
-    const {width, theme, isMobile, className, style, ...others} = this.props;
+    const {width, theme, selectedKeys,isMobile, className, style, ...others} = this.props;
 
     return (
       <Layout.Header
@@ -27,7 +27,7 @@ export default class Header extends PureComponent {
         >
           {/* Header 菜单项 begin */}
           {headerNavs && headerNavs.length > 0 ? (
-            <Menu mode="horizontal" selectedKeys={[]}>
+            <Menu mode="horizontal" defaultSelectedKeys={selectedKeys}>
               {headerNavs.map((nav, idx) => {
                 const linkProps = {};
                 // 打开新的页面

@@ -1,7 +1,7 @@
 /* eslint react/no-string-refs:0 */
-import React, { Component } from 'react';
-import { hashHistory } from 'react-router';
-import { Input, Button, Checkbox, Grid } from '@icedesign/base';
+import React, {Component} from 'react';
+import {hashHistory} from 'react-router';
+import {Input, Button, Checkbox, Grid} from '@icedesign/base';
 import {
   FormBinderWrapper as IceFormBinderWrapper,
   FormBinder as IceFormBinder,
@@ -9,8 +9,11 @@ import {
 } from '@icedesign/form-binder';
 import IceIcon from '@icedesign/icon';
 import './UserLogin.scss';
+import {LoginApi} from "./loginApi";
 
-const { Row, Col } = Grid;
+var loginApi = new LoginApi();
+
+const {Row, Col} = Grid;
 
 // 寻找背景图片可以从 https://unsplash.com/ 寻找
 const backgroundImage =
@@ -47,6 +50,9 @@ export default class UserLogin extends Component {
         console.log('errors', errors);
         return;
       }
+      loginApi.login(this.state.value, () => {
+        console.log('请求成功回掉-----------')
+      })
       console.log('values:', values);
       console.log(this.props);
       hashHistory.push('/');
@@ -64,7 +70,7 @@ export default class UserLogin extends Component {
         />
         <div style={styles.contentWrapper} className="content-wrapper">
           <h2 style={styles.slogan} className="slogan">
-            欢迎使用 <br /> ICE 内容管理系统
+            欢迎使用 <br/> 通用后台管理系统
           </h2>
           <div style={styles.formContainer}>
             <h4 style={styles.formTitle}>登录</h4>
@@ -82,11 +88,11 @@ export default class UserLogin extends Component {
                       style={styles.inputIcon}
                     />
                     <IceFormBinder name="account" required message="必填">
-                      <Input maxLength={20} placeholder="会员名/邮箱/手机号" />
+                      <Input maxLength={20} placeholder="会员名/邮箱/手机号"/>
                     </IceFormBinder>
                   </Col>
                   <Col>
-                    <IceFormError name="account" />
+                    <IceFormError name="account"/>
                   </Col>
                 </Row>
 
@@ -98,11 +104,11 @@ export default class UserLogin extends Component {
                       style={styles.inputIcon}
                     />
                     <IceFormBinder name="password" required message="必填">
-                      <Input htmlType="password" placeholder="密码" />
+                      <Input htmlType="password" placeholder="密码"/>
                     </IceFormBinder>
                   </Col>
                   <Col>
-                    <IceFormError name="password" />
+                    <IceFormError name="password"/>
                   </Col>
                 </Row>
 

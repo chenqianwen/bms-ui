@@ -21,9 +21,7 @@ const customHeaderNavs = [
   },
   {
     text: '基础',
-    to: 'https://github.com/alibaba/ice',
-    external: true,
-    newWindow: true,
+    to: '/',
     icon: 'nav-list',
   },
   {
