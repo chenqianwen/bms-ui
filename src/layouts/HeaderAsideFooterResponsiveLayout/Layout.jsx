@@ -223,7 +223,7 @@ export default class HeaderAsideFooterResponsiveLayout extends Component {
                             {nav.text}
                           </span>
                         </span>
-                      }
+                    }
                     >
                       {/*{遍历二级菜单}*/}
                       {nav.children.map((item) => {
